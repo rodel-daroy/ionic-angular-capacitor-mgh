@@ -1,0 +1,225 @@
+<ion-content fullscreen="true">
+  <div class="background-image">
+    <div class="overlay">
+      <ion-button (click)="closeModal()" fill="clear" style="padding-top: 30px; color: white; font-size: 20px">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+
+      <!-- Logo -->
+      <div class="menu-logo">
+        <!--<ion-img class="bus-logo" src="assets/images/mgh_logo_white.png"></ion-img>-->
+      </div>
+
+      <!-- Content Area -->
+      <div class="content">
+        <div class="section-header" style="color: white; text-align: center">
+          Choose your Mygoodhorse plan.
+        </div>
+
+        <ion-segment scrollable value="monthly" mode="ios" style="margin: 15px" (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="monthly" mode="ios"> Monthly Plans</ion-segment-button>
+          <ion-segment-button value="annual" mode="ios"> Annual Plans</ion-segment-button>
+        </ion-segment>
+
+        <ng-container *ngIf="view === 'monthly'">
+          <ng-container *ngFor="let prod of products">
+            <ion-item-group class="item-group" *ngIf="prod.id === 'mgh_small'">
+              <ion-item lines="none">
+                <ion-label>
+                  <div>
+                    <h2 class="ion-text-wrap item-header" style="white-space: pre-wrap !important">
+                      {{prod.title}} - {{prod.price}} {{prod.currency}}
+                    </h2>
+                    <p style="white-space: pre-wrap !important">{{prod.description}}</p>
+                  </div>
+                </ion-label>
+                <ion-button shape="round" color="secondary" size="small"
+                            (click)="joinSmallPlan(prod);$event.stopPropagation();">Join
+                </ion-button>
+              </ion-item>
+            </ion-item-group>
+
+            <ion-item-group class="item-group" *ngIf="prod.id === 'mgh_medium'">
+              <ion-item lines="none">
+                <ion-label>
+                  <div>
+                    <h2 class="ion-text-wrap item-header" style="white-space: pre-wrap !important">
+                      {{prod.title}} - {{prod.price}} {{prod.currency}}
+                    </h2>
+                    <p style="white-space: pre-wrap !important">{{prod.description}}</p>
+                  </div>
+                </ion-label>
+                <ion-button shape="round" color="secondary" size="small"
+                            (click)="joinMediumPlan(prod);$event.stopPropagation();">Join
+                </ion-button>
+              </ion-item>
+            </ion-item-group>
+
+            <ion-item-group class="item-group" *ngIf="prod.id === 'mgh_large'">
+              <ion-item lines="none">
+                <ion-label>
+                  <div>
+                    <h2 class="ion-text-wrap item-header" style="white-space: pre-wrap !important">
+                      {{prod.title}} - {{prod.price}} {{prod.currency}}
+                    </h2>
+                    <p style="white-space: pre-wrap !important">{{prod.description}}</p>
+                  </div>
+                </ion-label>
+                <ion-button shape="round" color="secondary" size="small"
+                            (click)="joinLargePlan(prod);$event.stopPropagation();">Join
+                </ion-button>
+              </ion-item>
+            </ion-item-group>
+          </ng-container>
+
+        </ng-container>
+
+        <ng-container *ngIf="view === 'annual'">
+          <ng-container *ngFor="let prod of products">
+            <ion-item-group class="item-group" *ngIf="prod.id === 'mgh_small_annual'">
+              <ion-item lines="none">
+                <ion-label>
+                  <div>
+                    <h2 class="ion-text-wrap item-header" style="white-space: pre-wrap !important">
+                      {{prod.title}} - {{prod.price}} {{prod.currency}}
+                    </h2>
+                    <p style="white-space: pre-wrap !important">{{prod.description}}</p>
+                  </div>
+                </ion-label>
+                <ion-button shape="round" color="secondary" size="small"
+                            (click)="joinSmallPlanAnnual(prod);$event.stopPropagation();">Join
+                </ion-button>
+              </ion-item>
+            </ion-item-group>
+
+            <ion-item-group class="item-group" *ngIf="prod.id === 'mgh_medium_annual'">
+              <ion-item lines="none">
+                <ion-label>
+                  <div>
+                    <h2 class="ion-text-wrap item-header" style="white-space: pre-wrap !important">
+                      {{prod.title}} - {{prod.price}} {{prod.currency}}
+                    </h2>
+                    <p style="white-space: pre-wrap !important">{{prod.description}}</p>
+                  </div>
+                </ion-label>
+                <ion-button shape="round" color="secondary" size="small"
+                            (click)="joinMediumPlanAnnual(prod);$event.stopPropagation();">Join
+                </ion-button>
+              </ion-item>
+            </ion-item-group>
+
+            <ion-item-group class="item-group" *ngIf="prod.id === 'mgh_large_annual'">
+              <ion-item lines="none">
+                <ion-label>
+                  <div>
+                    <h2 class="ion-text-wrap item-header" style="white-space: pre-wrap !important">
+                      {{prod.title}} - {{prod.price}} {{prod.currency}}
+                    </h2>
+                    <p style="white-space: pre-wrap !important">{{prod.description}}</p>
+                  </div>
+                </ion-label>
+                <ion-button shape="round" color="secondary" size="small"
+                            (click)="joinLargePlanAnnual(prod);$event.stopPropagation();">Join
+                </ion-button>
+              </ion-item>
+            </ion-item-group>
+          </ng-container>
+
+        </ng-container>
+
+        <!--
+        <ion-item-group *ngIf="products">
+          <ng-container *ngFor="let prod of products">
+            <ion-item style="--background: transparent; padding-left: 10vw; padding-right: 10vw;" lines="none"
+                      *ngIf="prod.id === 'mgh_small'">
+              <ion-button fill="solid" shape="round" expand="block" style="width: 95%">
+                {{prod.title}} -
+                <span style="font-weight: 600" (click)="joinSmallPlan(prod)">{{prod.price}}</span>
+              </ion-button>
+            </ion-item>
+            <ion-item style="--background: transparent; padding-left: 10vw; padding-right: 10vw;" lines="none"
+                      *ngIf="prod.id === 'mgh_medium'">
+              <ion-button fill="solid" shape="round" expand="block" style="width: 95%">
+                {{prod.title}} -
+                <span style="font-weight: 600" (click)="joinMediumPlan(prod)">{{prod.price}}</span>
+              </ion-button>
+            </ion-item>
+            <ion-item style="--background: transparent; padding-left: 10vw; padding-right: 10vw;" lines="none"
+                      *ngIf="prod.id === 'mgh_large'">
+              <ion-button fill="solid" shape="round" expand="block" style="width: 95%">
+                {{prod.title}} -
+                <span style="font-weight: 600" (click)="joinLargePlan(prod)">{{prod.price}}</span>
+              </ion-button>
+            </ion-item>
+          </ng-container>
+        </ion-item-group>
+        -->
+        <!--
+        <ion-item-group class="item-group">
+
+          <ion-item style="padding-top: 20px; padding-bottom: 20px;">
+            <ion-avatar slot="start">
+              <img src="../../assets/icons/time/018-pencil.svg">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="ion-text-wrap">Free Membership</h3>
+              <p class="ion-text-wrap">Access basic features and some Free Training Plans</p>
+            </ion-label>
+            <ion-button *ngIf="user$.memberships[0].membership_type ==='free'" fill="outline">
+              Current Plan
+            </ion-button>
+          </ion-item>
+
+          <ion-item style="padding-top: 20px; padding-bottom: 20px;">
+            <ion-avatar slot="start">
+              <img src="../../assets/icons/time/018-pencil.svg">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="ion-text-wrap">Online Training Membership - $7.99/month</h3>
+              <p class="ion-text-wrap">Access our Training Plans and other features</p>
+            </ion-label>
+            <ion-button *ngIf="user$.memberships[0].membership_type ==='free'" fill="solid" (click)="joinVirtual()">
+              Upgrade
+            </ion-button>
+            <ion-button *ngIf="user$.memberships[0].membership_type ==='virtual'" fill="outline">
+              Current Plan
+            </ion-button>
+          </ion-item>
+          <ion-item style="padding-top: 20px; padding-bottom: 20px;">
+            <ion-avatar slot="start">
+              <img src="../../assets/icons/time/018-pencil.svg">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="ion-text-wrap">Partner Membership</h3>
+              <p class="ion-text-wrap">
+                Are you a member of a Parnter company, and provided a Partner Code. Enter it here for access
+              </p>
+            </ion-label>
+            <ion-button *ngIf="user$.memberships[0].membership_type ==='partners'" fill="outline">
+              Current Plan
+            </ion-button>
+            <ion-button *ngIf="user$.memberships[0].membership_type !=='partners'" fill="solid" (click)="openPartner()">
+              Join
+            </ion-button>
+          </ion-item>
+          <ion-item style="padding-top: 20px; padding-bottom: 20px;">
+            <ion-avatar slot="start">
+              <img src="../../assets/icons/time/018-pencil.svg">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="ion-text-wrap">Full Gym Membership</h3>
+              <p class="ion-text-wrap">
+                For members who attend physical classes run by Gym To Green staff. Contact Gym to
+                Green to discuss these options.
+              </p>
+            </ion-label>
+            <ion-button *ngIf="user$.memberships[0].membership_type ==='full'" fill="outline">
+              Current Plan
+            </ion-button>
+          </ion-item>
+        </ion-item-group>
+        -->
+      </div>
+    </div>
+  </div>
+</ion-content>
